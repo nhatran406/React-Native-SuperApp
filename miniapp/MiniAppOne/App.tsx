@@ -12,16 +12,14 @@ const {ConnectNativeModule} = NativeModules;
 const App = (props: any): JSX.Element => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>App One</Text>
-      <Text style={styles.content}>
-        Here props from super app: {JSON.stringify(props)}
-      </Text>
+      <Text style={styles.title}>ACB Lite</Text>
+      <Text style={styles.content}>Super app: {JSON.stringify(props)}</Text>
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
           ConnectNativeModule?.closeApp(AppInfo.name);
         }}>
-        <Text style={styles.content}>Close App</Text>
+        <Text style={styles.content}>Close mini app now!</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

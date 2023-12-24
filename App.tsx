@@ -19,6 +19,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import {useApp} from './useApp';
 
 const {ConnectNativeModule} = NativeModules;
 
@@ -28,15 +29,17 @@ interface App {
 }
 
 function App(): JSX.Element {
+  const {miniApps} = useApp();
   const [input, setInput] = useState<string>('');
+
   const LIST_APPS: Array<App> = [
     {
-      bundleId: `index.${Platform.OS}-1.bundle`,
-      appName: 'MiniAppOne',
+      bundleId: `index.${Platform.OS}-${miniApps.MiniAppOne.version}.bundle`,
+      appName: miniApps.MiniAppOne?.name,
     },
     {
       appName: 'MiniAppTwo',
-      bundleId: `index.${Platform.OS}-2.bundle`,
+      bundleId: `index.${Platform.OS}-${miniApps.MiniAppOne.version}.bundle`,
     },
   ];
 
