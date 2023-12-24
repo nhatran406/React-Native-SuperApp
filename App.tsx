@@ -23,25 +23,14 @@ import {useApp} from './useApp';
 
 const {ConnectNativeModule} = NativeModules;
 
-interface App {
+export interface App {
   bundleId: string;
   appName: string;
 }
 
 function App(): JSX.Element {
-  const {miniApps} = useApp();
+  const {appInStore} = useApp();
   const [input, setInput] = useState<string>('');
-
-  const LIST_APPS: Array<App> = [
-    {
-      bundleId: `index.${Platform.OS}-${miniApps.MiniAppOne.version}.bundle`,
-      appName: miniApps.MiniAppOne?.name,
-    },
-    {
-      appName: 'MiniAppTwo',
-      bundleId: `index.${Platform.OS}-${miniApps.MiniAppOne.version}.bundle`,
-    },
-  ];
 
   const goToNextApp = useCallback(
     async (item: App) => {
@@ -76,7 +65,7 @@ function App(): JSX.Element {
             style={styles.input}
           />
           <View style={styles.content}>
-            {LIST_APPS.map(app => (
+            {appInStore.map(app => (
               <TouchableOpacity
                 key={app?.bundleId}
                 style={styles.btnApp}

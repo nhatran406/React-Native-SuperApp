@@ -1,5 +1,11 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import {getMiniApps} from './src/api/miniRegistry';
+import {Platform} from 'react-native';
+
+export interface App {
+  bundleId: string;
+  appName: string;
+}
 
 export const useApp = () => {
   const [miniApps, setMiniApps] = useState<any>(null);
@@ -14,5 +20,22 @@ export const useApp = () => {
     fetchData();
   }, []);
 
-  return {miniApps};
+  const appInStore: Array<App> = useMemo(
+    () =>
+      miniApps
+        ? [
+            {
+              bundleId: `index.${Platform.OS}-${miniApps.MiniAppOne.code}.${miniApps.MiniAppOne.version}.bundle`,
+              appName: miniApps.MiniAppOne?.name,
+            },
+            {
+              appName: 'MiniAppTwo',
+              bundleId: `index.${Platform.OS}-${miniApps.MiniAppTwo.code}.${miniApps.MiniAppTwo.version}.bundle`,
+            },
+          ]
+        : [],
+    [miniApps],
+  );
+
+  return {miniApps, appInStore};
 };
