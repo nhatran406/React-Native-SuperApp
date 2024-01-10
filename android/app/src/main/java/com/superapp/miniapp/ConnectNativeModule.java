@@ -43,7 +43,7 @@ public class ConnectNativeModule extends ReactContextBaseJavaModule {
         appBundle.setContext(reactContext);
 
 
-        String bundleLink = "http://192.168.1.8:8080/bundle/" + appPath;
+        String bundleLink = "http://192.168.1.3:8080/bundle/" + appPath;
         appBundle.downloadFileInInternalStorage(bundleLink, appPath);
 
         Intent intent = new Intent(reactContext, MiniAppActivity.class);

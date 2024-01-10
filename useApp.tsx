@@ -13,6 +13,7 @@ export const useApp = () => {
     async function fetchData() {
       // You can await here
       const data = await getMiniApps();
+      console.info('TODO: data', data);
       if (data) {
         setMiniApps(data);
       }
@@ -27,10 +28,12 @@ export const useApp = () => {
             {
               bundleId: `index.${Platform.OS}-${miniApps.MiniAppOne.code}.${miniApps.MiniAppOne.version}.bundle`,
               appName: miniApps.MiniAppOne?.name,
+              port: 8091,
             },
             {
               appName: 'MiniAppTwo',
               bundleId: `index.${Platform.OS}-${miniApps.MiniAppTwo.code}.${miniApps.MiniAppTwo.version}.bundle`,
+              port: 8092,
             },
           ]
         : [],

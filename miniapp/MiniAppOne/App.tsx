@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Text,
   SafeAreaView,
@@ -6,18 +6,30 @@ import {
   TouchableOpacity,
   NativeModules,
 } from 'react-native';
-import AppInfo from './app.json';
+// import AppInfo from './app.json';
+// import {initRegistry} from './miniRegistry';
+import {initRegistry} from './miniRegistry';
 
 const {ConnectNativeModule} = NativeModules;
 const App = (props: any): JSX.Element => {
+  const [brandName, setBrandName] = useState('');
+  useEffect(() => {
+    async function fetchData() {
+      const data = await initRegistry();
+      setBrandName(data || '');
+    }
+    fetchData();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>ACB Lite</Text>
       <Text style={styles.content}>Super app: {JSON.stringify(props)}</Text>
+      <Text style={styles.content}>Phone Brand name: {brandName}</Text>
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          ConnectNativeModule?.closeApp(AppInfo.name);
+          ConnectNativeModule?.closeApp();
         }}>
         <Text style={styles.content}>Close mini app now!</Text>
       </TouchableOpacity>

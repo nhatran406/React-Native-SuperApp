@@ -36,30 +36,6 @@ public class MiniAppBundle {
             fos.write(response.body().bytes());
             System.out.println("TODO: file: " + filePath);
             fos.close();
-//            client.newCall(request).enqueue(new Callback() {
-//                @Override
-//                public void onResponse(Call call, Response response) throws IOException {
-//                    InputStream fileData = response.body().byteStream();
-//
-//
-//                    if (fileData != null) {
-//                        try {
-//                            // true will be same as Context.MODE_APPEND
-//                            FileOutputStream output = new FileOutputStream(new File(filePath), true);
-//                            output.write(fileData.readAllBytes());
-//                            output.close();
-//                            System.out.println("TODO: file: " + filePath);
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call call, IOException e) {
-//                    e.printStackTrace();
-//                }
-//            });
         }
     }
 

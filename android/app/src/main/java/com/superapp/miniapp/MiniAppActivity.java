@@ -12,7 +12,8 @@ import com.facebook.react.ReactRootView;
 import com.facebook.react.common.LifecycleState;
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.facebook.react.shell.MainReactPackage;
-import com.superapp.MainActivity;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,9 +42,12 @@ public class MiniAppActivity extends ReactActivity implements DefaultHardwareBac
         baseFolder = this.getApplicationContext().getFilesDir().getAbsolutePath();
         String filePath = baseFolder + "/" + appPath;
 
-        builder.setJSBundleFile(filePath);
+//        if (devLoad) {
+//            filePath = "https://192.168.1.2:8091/index.bundle?platform=android&dev=true";
+//        }
+//        builder.setJSBundleFile(filePath);
         mReactInstanceManager = builder
-//                .setJSBundleFile(filePath)
+                .setJSBundleFile(filePath)
                 .setApplication(getApplication())
                 .setJavaScriptExecutorFactory(new HermesExecutorFactory())
                 .setCurrentActivity(this)
@@ -60,7 +64,8 @@ public class MiniAppActivity extends ReactActivity implements DefaultHardwareBac
     public ArrayList<ReactPackage> getPackages() {
         return new ArrayList<>(Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
-                new ConnectNativePackage()
+                new ConnectNativePackage(),
+                new RNDeviceInfo()
         ));
     }
 
