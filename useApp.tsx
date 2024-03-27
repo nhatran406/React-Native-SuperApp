@@ -5,6 +5,8 @@ import {Platform} from 'react-native';
 export interface App {
   bundleId: string;
   appName: string;
+  version: string;
+  appCode: string;
 }
 
 export const useApp = () => {
@@ -28,11 +30,15 @@ export const useApp = () => {
             {
               bundleId: `index.${Platform.OS}-${miniApps.MiniAppOne.code}.${miniApps.MiniAppOne.version}.bundle`,
               appName: miniApps.MiniAppOne?.name,
+              version: miniApps.MiniAppOne?.version,
+              appCode: miniApps.MiniAppOne?.code,
               port: 8091,
             },
             {
               appName: 'MiniAppTwo',
               bundleId: `index.${Platform.OS}-${miniApps.MiniAppTwo.code}.${miniApps.MiniAppTwo.version}.bundle`,
+              version: miniApps.MiniAppTwo?.version,
+              appCode: miniApps.MiniAppTwo.code,
               port: 8092,
             },
           ]

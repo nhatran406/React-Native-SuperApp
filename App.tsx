@@ -26,6 +26,8 @@ const {ConnectNativeModule} = NativeModules;
 export interface App {
   bundleId: string;
   appName: string;
+  version: string;
+  appCode: string;
 }
 
 function App(): JSX.Element {
@@ -34,12 +36,17 @@ function App(): JSX.Element {
 
   const goToNextApp = useCallback(
     async (item: App) => {
+      const params = {
+        text: input,
+        ...item,
+      };
+      console.info('TODO: params', params);
       ConnectNativeModule?.openApp(
         item.appName,
+        item.appCode,
+        item.version,
         item.bundleId,
-        {
-          text: input,
-        },
+        params,
         false,
         () => {},
       );

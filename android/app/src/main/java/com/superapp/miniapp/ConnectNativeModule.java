@@ -36,21 +36,23 @@ public class ConnectNativeModule extends ReactContextBaseJavaModule {
 
 
     @ReactMethod
-    public void openApp(String bundleName, String appPath, ReadableMap initProps,
+    public void openApp(String bundleName, String appCode, String version, String appPath, ReadableMap initProps,
                         boolean devLoad, Callback callback) throws IOException {
         System.out.println("TODO: xxx: START");
         appBundle = new MiniAppBundle();
         appBundle.setContext(reactContext);
+        String packageExtension = ".zip";
+        String zipFile = appCode + "." + version + packageExtension;
+        String hashPackage = "http://192.168.1.82:8080/bundle/" + zipFile;
 
-
-        String bundleLink = "http://192.168.1.3:8080/bundle/" + appPath;
-        appBundle.downloadFileInInternalStorage(bundleLink, appPath);
+        System.out.println("TODO: hashPackage: " + hashPackage);
+        appBundle.downloadFileInInternalStorage(hashPackage, appPath, zipFile);
 
         Intent intent = new Intent(reactContext, MiniAppActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         Bundle bundle = new Bundle();
         bundle.putString("bundleName", bundleName);
-        bundle.putString("appPath", appPath);
+        bundle.putString("appPath", "build/" + appPath);
         bundle.putBoolean("devLoad", devLoad);
         bundle.putBundle("initProps", Arguments.toBundle(initProps));
         intent.putExtras(bundle);
