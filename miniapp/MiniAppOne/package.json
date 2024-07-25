@@ -7,7 +7,7 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "build-android": "rm -rf ./build && mkdir ./build && react-native bundle --platform android --dev false --entry-file index.js --bundle-output ./build/index.android-one.1.0.15.bundle && cp -r assets/* ./build && zip -r ../../../mini-app-dashboard-api/bundle/one.1.0.15.zip ./build",
+    "build-android": "rm -rf ./build && mkdir ./build && react-native bundle --platform android --dev false --entry-file index.js --bundle-output ./build/index.android-one.1.0.25.bundle && cp -r assets/* ./build && zip -r ../../../mini-app-dashboard-api/bundle/one.1.0.25.zip ./build",
     "test": "jest"
   },
   "dependencies": {

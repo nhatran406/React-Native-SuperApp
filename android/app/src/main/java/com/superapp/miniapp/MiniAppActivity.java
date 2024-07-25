@@ -36,16 +36,11 @@ public class MiniAppActivity extends ReactActivity implements DefaultHardwareBac
 
         ReactRootView mReactRootView = new ReactRootView(this);
 
-//        val packages: List<ReactPackage> = PackageList(application).packages
         ReactInstanceManagerBuilder builder = ReactInstanceManager.builder();
         String baseFolder;
         baseFolder = this.getApplicationContext().getFilesDir().getAbsolutePath();
         String filePath = baseFolder + "/" + appPath;
 
-//        if (devLoad) {
-//            filePath = "https://192.168.1.2:8091/index.bundle?platform=android&dev=true";
-//        }
-//        builder.setJSBundleFile(filePath);
         mReactInstanceManager = builder
                 .setJSBundleFile(filePath)
                 .setApplication(getApplication())

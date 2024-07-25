@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -19,6 +19,8 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+
+import RNFS from 'react-native-fs';
 import {useApp} from './useApp';
 
 const {ConnectNativeModule} = NativeModules;
@@ -34,10 +36,21 @@ function App(): JSX.Element {
   const {appInStore} = useApp();
   const [input, setInput] = useState<string>('');
 
+  const hostDocumentDirectoryPath = useMemo(() => {
+    if (Platform.OS === 'android') {
+      // return RNFS.DocumentDirectoryPath;
+      return '//data/data/com.superapp/files';
+    } else if (Platform.OS === 'ios') {
+      return RNFS.MainBundlePath;
+    }
+    return '';
+  }, []);
+
   const goToNextApp = useCallback(
     async (item: App) => {
       const params = {
         text: input,
+        hostDocumentDirectoryPath,
         ...item,
       };
       console.info('TODO: params', params);

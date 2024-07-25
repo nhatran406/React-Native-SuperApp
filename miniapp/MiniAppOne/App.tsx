@@ -6,18 +6,17 @@ import {
   TouchableOpacity,
   NativeModules,
   Image,
-  Platform,
 } from 'react-native';
-// import AppInfo from './app.json';
-// import {initRegistry} from './miniRegistry';
 import {initRegistry} from './miniRegistry';
 
 const {ConnectNativeModule} = NativeModules;
-const App = (props: any): JSX.Element => {
-  const uriAssets = isAndroid => (isAndroid ? 'assets:' : '');
 
+interface MiniAppProps {
+  hostDocumentDirectoryPath?: string;
+}
+
+const App = (props: MiniAppProps): JSX.Element => {
   const [brandName, setBrandName] = useState('');
-  const [appInfo, setAppInfo] = useState();
 
   useEffect(() => {
     async function fetchData() {
@@ -26,20 +25,21 @@ const App = (props: any): JSX.Element => {
     }
     fetchData();
   }, []);
-  const logoUri = './acb_logo.png';
+
+  const imagePath = `file:/${props.hostDocumentDirectoryPath}/build/acb_logo.png`;
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>ACB Lite</Text>
       <Text style={styles.content}>Super app: {JSON.stringify(props)}</Text>
       <Text style={styles.content}>Phone Brand name: {brandName}</Text>
-      <Image source={require(logoUri)} alt="dauxanh" />
+      <Image source={{uri: imagePath}} style={{width: 200, height: 100}} />
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
           ConnectNativeModule?.closeApp();
         }}>
-        <Text style={styles.content}>Close mini app now!</Text>
+        <Text style={{color: 'white'}}>Close mini app now!</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ffffff',
     flex: 1,
+    padding: 16,
   },
   title: {
     fontSize: 24,
