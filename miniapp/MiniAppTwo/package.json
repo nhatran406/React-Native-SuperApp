@@ -7,6 +7,7 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
+    "build-android": "rm -rf ./build && mkdir ./build && react-native bundle --platform android --dev false --entry-file index.js --bundle-output ./build/index.android-two.1.0.1.bundle && cp -r assets/* ./build && zip -r ../../../mini-app-dashboard-api/bundle/two.1.0.1.zip ./build",
     "test": "jest"
   },
   "dependencies": {
