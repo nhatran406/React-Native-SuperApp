@@ -30,7 +30,7 @@ const App = (props: MiniAppProps): JSX.Element => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>ACB Lite</Text>
+      <Text style={styles.title}>ACB Lite - 2024</Text>
       <Text style={styles.content}>Super app: {JSON.stringify(props)}</Text>
       <Text style={styles.content}>Phone Brand name: {brandName}</Text>
       <Image source={{uri: imagePath}} style={{width: 200, height: 100}} />

@@ -43,7 +43,7 @@ public class ConnectNativeModule extends ReactContextBaseJavaModule {
         appBundle.setContext(reactContext);
         String packageExtension = ".zip";
         String zipFile = appCode + "." + version + packageExtension;
-        String hashPackage = "http://192.168.1.1:8080/bundle/" + zipFile;
+        String hashPackage = "http://192.168.1.8:8080/bundle/" + zipFile;
 
         System.out.println("TODO: hashPackage: " + hashPackage);
         appBundle.downloadFileInInternalStorage(hashPackage, appPath, zipFile);

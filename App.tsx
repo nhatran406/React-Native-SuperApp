@@ -49,7 +49,7 @@ function App(): JSX.Element {
   const goToNextApp = useCallback(
     async (item: App) => {
       const params = {
-        text: input,
+        text: 'Hello acb',
         hostDocumentDirectoryPath,
         ...item,
       };
